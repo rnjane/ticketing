@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ticketing System{% endblock %}
+{% block content %}
+<div class="modal fade" role="dialog" tabindex="-1" id="updateusermodal" aria-labelledby="updateusermodal">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="#" method="POST" id="updateuserform">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="user_ole">User Role</label>
+            <select class="form-control" id="user_role" name="user_role">
+              <option>Dealer</option>
+              <option>Manager</option>
+              <option>Accountant</option>
+              <option>Supervisor</option>
+              <option>Pump Attendant</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="is_active">Is Active</label>
+            <select class="form-control" id="is_active" name="is_active">
+              <option>False</option>
+              <option>True</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <button class="btn btn-primary btn-block" type="button" data-dismiss="modal">
+                  <i class="fa fa-edit"></i>Close</button>
+              </div>
+              <div class="col">
+                <button class="btn btn-primary btn-block" type="submit">Update
+                  <i class="fa fa-chevron-circle-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" role="dialog" tabindex="-1" id="addusermodal" aria-labelledby="addusermodal">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add a ticket</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" id="addemployeeform">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <button class="btn btn-primary btn-block" type="button" data-dismiss="modal">
+                  <i class="fa fa-edit"></i>Close</button>
+              </div>
+              <div class="col">
+                <button class="btn btn-primary btn-block" type="submit">Create Ticket
+                  <i class="fa fa-chevron-circle-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-content-container container px-3">
+  <!-- Page Header -->
+  <div class="page-header row no-gutters py-4">
+    <div class="col-12 col-sm-4 text-center text-sm-left mb-4 mb-sm-0">
+      <span class="text-uppercase page-subtitle"></span>
+      <h3 class="page-title">My Tickets</h3>
+    </div>
+    <div class="offset-sm-4 col-4 d-flex col-12 col-sm-4 d-flex align-items-center">
+      <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addusermodal">
+        </i>Create Ticket</button>
+    </div>
+  </div>
+  <!-- End Page Header -->
+  <!-- Transaction History Table -->
+  <table class="psms-table d-none">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Summary</th>
+        <th>Status</th>
+        <th>Created at</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in tickets %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ ticket.summary }}</td>
+        <td>{{ ticket.status }}</td>
+        <td>{{ ticket.created_at }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script>
+  $('#updateusermodal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var user_active = button.data('useractive')
+    var user_id = button.data('id')
+    var user_role = button.data('userrole')
+    var user_email = button.data('email')
+    var modal = $(this)
+    modal.find('.user_role').val("Manager").change();
+    modal.find('.modal-title').text('update ' + user_email)
+    var update_url = '/adminstration/users/' + user_id + "/"
+    $("#updateuserform").attr("action", update_url)
+  })
+</script>
+{% endblock %}

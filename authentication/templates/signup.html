@@ -1,240 +1,64 @@
+{% extends "auth-base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-        <title>Craft | Bootstrap 5 HTML Admin Dashboard Theme by Keenthemes</title>
-        <meta charset="utf-8"/>
-        <meta name="description" content="Craft admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets."/>
-        <meta name="keywords" content="Craft, bootstrap, bootstrap 5, admin themes, dark mode, free admin themes, bootstrap admin, bootstrap dashboard"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>      
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content="Craft - Bootstrap 5 HTML Admin Dashboard Theme" />
-        <meta property="og:url" content="https://themes.getbootstrap.com/product/craft-bootstrap-5-admin-dashboard-theme"/>
-        <meta property="og:site_name" content="Keenthemes | Craft" />
-        <link rel="canonical" href="https://preview.keenthemes.com/craft"/>
-        <link rel="shortcut icon" href="{% static 'assets/media/logos/favicon.ico' %}"/>
-
-        <!--begin::Fonts(mandatory for all pages)-->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>        <!--end::Fonts-->
-
-        
-        
-                    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-                            <link href="{% static 'assets/plugins/global/plugins.bundle.css' %}" rel="stylesheet" type="text/css"/>
-                            <link href="{% static 'assets/css/style.bundle.css' %}" rel="stylesheet" type="text/css"/>
-                        <!--end::Global Stylesheets Bundle-->
-        
-        <script>
-            // Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
-            if (window.top != window.self) {
-                window.top.location.replace(window.self.location.href);
-            }
-        </script>
-    </head>
-    <!--end::Head-->
-
-    <!--begin::Body-->
-    <body  id="kt_body"  class="auth-bg" >
-        <!--begin::Theme mode setup on page load-->
-<script>
-	var defaultThemeMode = "light";
-	var themeMode;
-
-	if ( document.documentElement ) {
-		if ( document.documentElement.hasAttribute("data-bs-theme-mode")) {
-			themeMode = document.documentElement.getAttribute("data-bs-theme-mode");
-		} else {
-			if ( localStorage.getItem("data-bs-theme") !== null ) {
-				themeMode = localStorage.getItem("data-bs-theme");
-			} else {
-				themeMode = defaultThemeMode;
-			}			
-		}
-
-		if (themeMode === "system") {
-			themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-		}
-
-		document.documentElement.setAttribute("data-bs-theme", themeMode);
-	}            
-</script>
-<!--end::Theme mode setup on page load-->            
-        
-        <!--begin::Main-->
-	<div class="d-flex flex-column flex-root">
-		<!--begin::Authentication - Sign-up -->
-<div class="d-flex flex-column flex-lg-row flex-column-fluid">
-    <!--begin::Aside-->
-    <div class="d-flex flex-column flex-lg-row-auto bg-primary w-xl-600px positon-xl-relative">
-        <!--begin::Wrapper-->
-        <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
-            <!--begin::Header-->
-            <div class="d-flex flex-row-fluid flex-column text-center p-5 p-lg-10 pt-lg-20">          
-                <!--begin::Logo-->
-                <a href="{% static 'index-2.html' %}" class="py-2 py-lg-20">
-                    <img alt="Logo" src="{% static 'assets/media/logos/logo-ellipse.svg' %}" class="h-60px h-lg-70px"/>
-                </a>    
-                <!--end::Logo-->
-
-                <!--begin::Title-->
-                <h1 class="d-none d-lg-block fw-bold text-white fs-2qx pb-5 pb-md-10">
-                    Welcome to campus connect
-                </h1>
-                <!--end::Title-->
-
-                <!--begin::Description-->
-                <p class="d-none d-lg-block fw-semibold fs-2 text-white">
-                    A simple way to make and track requests <br/>
-                    in your campus
-                </p>
-                <!--end::Description-->
+{% block title %}Ticketing - Signup{% endblock %}
+{% block content %}
+<!-- End Main Sidebar -->
+          <main class="main-content col" style=" margin-top: 13%;">
+          <div class="main-content-container container-fluid px-4 my-auto h-100">
+            <div class="row no-gutters h-100">
+              <div class="col-lg-3 col-md-5 auth-form mx-auto my-auto">
+                <div class="card">
+                  <div class="card-body">
+                    <img class="auth-form__logo d-table mx-auto mb-3" src="{% static 'images/logo.svg'%}" alt="Register">
+                    <h5 class="auth-form__title text-center mb-4">Create Account</h5>
+                    <form  method="POST">
+                        {% csrf_token %}
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Student email</label>
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="email" placeholder="Email">
+                      </div>
+                      <div class="form-group">
+                        <label for="regno">Registration Number</label>
+                        <input type="regno" name="regno" class="form-control" id="regno" aria-describedby="regno" placeholder="Reg Number">
+                      </div>
+                       <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword2">Repeat Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Repeat Password">
+                      </div>
+                      <button type="submit" class="btn btn-pill btn-accent d-table mx-auto">Login Account</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="auth-form__meta d-flex mt-4">
+                  <a class="button secondaryAction" href="{% url 'authenticate:reset_password' %}">Forgot Password</a>
+                  <a class="ml-auto" href="{% url 'authenticate:login' %}">Login</a>
+                </div>
+                <div>
+                  {% if form.errors %}
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                    <div class="alert">
+                        <strong>{{ error|escape }}</strong>
+    
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+              </div>
             </div>
-            <!--end::Header-->
-
-            <!--begin::Illustration-->
-            <div class="d-none d-lg-block d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px" 
-                style="background-image: url({% static 'assets/media/illustrations/sigma-1/17.png' %})"> 
-            </div>
-            <!--end::Illustration-->
-        </div>
-        <!--end::Wrapper-->
+          </div>
+        </main>
+      </div>
     </div>
-    <!--begin::Aside-->
-
-    <!--begin::Body-->
-    <div class="d-flex flex-column flex-lg-row-fluid py-10">
-        <!--begin::Content-->
-        <div class="d-flex flex-center flex-column flex-column-fluid">
-            <!--begin::Wrapper-->
-            <div class="w-lg-600px p-10 p-lg-15 mx-auto">
-                
-<!--begin::Form-->
-<form class="form w-100" novalidate="novalidate" data-kt-redirect-url="/craft/authentication/sign-in/basic.html" id="kt_sign_up_form">
-    <!--begin::Heading-->
-    <div class="mb-10 text-center">
-        <!--begin::Title-->
-        <h1 class="text-dark mb-3">
-            Create an Account
-        </h1>
-        <!--end::Title-->      
-
-        <!--begin::Link-->
-        <div class="text-gray-400 fw-semibold fs-4">
-            Already have an account?
-
-            <a href="{% url 'signin' %}" class="link-primary fw-bold">
-                Sign in here
-            </a>
-        </div>
-        <!--end::Link-->
-    </div>
-    <!--end::Heading-->
-
-    <!--begin::Input group-->
-    <div class="row fv-row mb-7">
-        <!--begin::Col-->
-        <div class="col-xl-6">                           
-            <label class="form-label fw-bold text-dark fs-6">First Name</label>
-            <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first-name" autocomplete="off" />
-        </div>
-        <!--end::Col-->
-
-        <!--begin::Col-->
-        <div class="col-xl-6">                            
-            <label class="form-label fw-bold text-dark fs-6">Last Name</label>
-            <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last-name" autocomplete="off" />
-        </div>
-        <!--end::Col-->
-    </div>
-    <!--end::Input group-->
-
-    <!--begin::Input group-->
-    <div class="fv-row mb-7">
-        <label class="form-label fw-bold text-dark fs-6">Email</label>
-        <input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
-    </div>
-    <!--end::Input group-->
-    <div class="fv-row mb-7">
-        <label class="form-label fw-bold text-dark fs-6">Registration Number</label>
-        <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="regno" autocomplete="off" />
-    </div>
-
-    <!--begin::Input group-->
-    <div class="mb-10 fv-row">
-        <!--begin::Wrapper-->
-        <div class="mb-1">
-            <!--begin::Label-->
-            <label class="form-label fw-bold text-dark fs-6">
-                Password
-            </label> 
-            <!--end::Label-->
-
-            <!--begin::Input wrapper-->
-            <div class="position-relative mb-3">    
-                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="password" autocomplete="off"/>
-
-                <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
-                    <i class="ki-duotone ki-eye-slash fs-2"></i>                    <i class="ki-duotone ki-eye fs-2 d-none"></i>                </span>
-            </div>
-            <!--end::Input wrapper-->
-        </div>
-        <!--end::Wrapper-->
-
-
-    </div>
-    <!--end::Input group--->
-
-    <!--begin::Input group-->
-    <div class="fv-row mb-5">
-        <label class="form-label fw-bold text-dark fs-6">Confirm Password</label>
-        <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" name="confirm-password" autocomplete="off" />
-    </div>
-    <!--end::Input group-->
-
-    <!--begin::Actions-->
-    <div class="text-center">
-        <button type="button" id="kt_sign_up_submit" class="btn btn-lg btn-primary">
-            <span class="indicator-label">
-                Submit
-            </span>
-            <span class="indicator-progress">
-                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-            </span>    
-        </button>
-    </div>
-    <!--end::Actions-->
-</form>
-<!--end::Form-->
-            </div>
-            <!--end::Wrapper-->
-        </div>
-        <!--end::Content-->
-    </div>
-    <!--end::Body-->
-</div>
-<!--end::Authentication - Sign-up-->
-                         	</div>
-<!--end::Main-->
-
-        
-        <!--begin::Javascript-->
-        <script>
-            var hostUrl = "{% static 'assets/index.html";        </script>
-
-                    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-                            <script src="{% static 'assets/plugins/global/plugins.bundle.js' %}"></script>
-                            <script src="{% static 'assets/js/scripts.bundle.js' %}"></script>
-                        <!--end::Global Javascript Bundle-->
-        
-        
-                    <!--begin::Custom Javascript(used for this page only)-->
-                            <script src="{% static 'assets/js/custom/authentication/sign-up/general.js' %}"></script>
-                        <!--end::Custom Javascript-->
-                <!--end::Javascript-->
-        
-            </body>
-    <!--end::Body-->
-
-<!-- Mirrored from preview.keenthemes.com/craft/authentication/sign-up/basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Jan 2024 19:28:08 GMT -->
-</html>
+  </body>
+{% endblock %}

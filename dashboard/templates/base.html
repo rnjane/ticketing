@@ -1,0 +1,102 @@
+{% load static %}
+<!doctype html>
+<html class="no-js h-100" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" id="main-stylesheet" data-version="1.0.0" href="{% static 'styles/shards-dashboards.1.3.1.min.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" id="main-stylesheet" data-version="1.0.0" href="{% static 'styles/shards-dashboards.1.3.1.min.css' %}">
+  <link rel="stylesheet" id="main-stylesheet" data-version="1.0.0" href="{% static 'styles/extras.1.3.1.min.css' %}">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+   
+  </head>
+  <body class="h-100">
+    <div class="container-fluid">
+      <div class="row">
+        <main class="main-content col-lg-12 col-md-12 col-sm-12 p-0">
+          <div class="main-navbar  bg-white">
+            <div class="container p-0">
+              <!-- Main Navbar -->
+              <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
+                <a class="navbar-brand" href="#" style="line-height: 25px;">
+                    <div class="d-table m-auto">
+                      <img id="main-logo" class="d-inline-block align-top mr-1 ml-3" style="max-width: 25px;" src="{% static 'images/logo.svg' %}" alt="">
+                      <span class="d-none d-md-inline ml-1">Ticketing System</span>
+                    </div>
+                  </a>
+                <ul class="navbar-nav border-left flex-row border-right ml-auto">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-nowrap px-4 py-4 text-center" data-toggle="dropdown" href="#"
+                      role="button" aria-haspopup="true" aria-expanded="false">
+                      <span class="d-none d-md-inline-block">{{ request.user.email }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-small">
+                      <a class="dropdown-item" href="#">
+                        <i class="material-icons">&#xE7FD;</i> Profile</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item text-danger" href="{% url 'authenticate:logout' %}">
+                        <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                    </div>
+                  </li>
+                </ul>
+                <nav class="nav">
+                  <a href="#" class="nav-link nav-link-icon toggle-sidebar  d-inline d-lg-none text-center " data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
+                    <i class="material-icons">&#xE5D2;</i>
+                  </a>
+                </nav>
+              </nav>
+            </div>
+          </div>
+          {% include 'messages.html' %}
+          {% block content %}
+          {% endblock %}
+          <!-- <footer class="main-footer d-flex p-2 px-3 bg-white border-top" style="bottom: 0; position: absolute; width: 100%;">
+            <span class="copyright ml-auto my-auto mr-2">Copyright © 2022 RevisingAid</span>
+          </footer> -->
+        </main>
+      </div>
+    </div>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+  <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
+  <script src="{% static 'scripts/extras.1.3.1.min.js' %}"></script>
+  <script src="{% static 'scripts/shards-dashboards.1.3.1.min.js' %}"></script>
+  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+  <script>
+    'use strict';
+  (function ($) {
+    $('.users-table').DataTable({ responsive: true });
+  })(jQuery);
+  </script>
+  <script>
+    'use strict';
+  (function ($) {
+    $('.psms-table').DataTable({ responsive: true });
+  })(jQuery);
+  </script>
+  <script>
+    $('#selected_date').datepicker({
+      format: 'M. dd, yyyy',
+      autoclose: true,
+      todayHighlight: true,
+    }).on('show.bs.modal', function(event) {event.stopPropagation();});
+  </script>
+  </body>
+</html>

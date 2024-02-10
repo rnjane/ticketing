@@ -1,0 +1,68 @@
+{% extends "auth-base.html" %}
+{% load static %}
+{% block title %}Ticketing - Login{% endblock %}
+{% block content %}
+<!-- End Main Sidebar -->
+          <main class="main-content col" style=" margin-top: 13%;">
+          <div class="main-content-container container-fluid px-4 my-auto h-100">
+            <div class="row no-gutters h-100">
+            <div class="col-lg-3 col-md-5 auth-form mx-auto my-auto">
+              <div class="card">
+                <div class="card-body">
+                    <img class="auth-form__logo d-table mx-auto mb-3" src="{% static 'images/logo.svg'%}" alt="Shards Dashboards - Register Template">
+                    <h5 class="auth-form__title text-center mb-4">Login Your Account</h5>
+                    <form  method="POST" action="{% url 'authenticate:login' %}">
+                      {% csrf_token %}
+                    <!-- <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div> -->
+                    <div class="form-group">
+                      <label for="username">Registration Number</label>
+                      <input type="text" name="username" class="form-control" id="username" aria-describedby="username" placeholder="Reg No">
+                    </div>
+                     <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-pill btn-accent d-table mx-auto">Login Account</button>
+                  </form>
+                  </div>
+                </div>
+                <div class="auth-form__meta d-flex mt-4">
+                  <a class="button secondaryAction" href="{% url 'authenticate:reset_password' %}">Forgot Password</a>
+                  <a class="ml-auto" href="{% url 'authenticate:signup' %}">Create new account?</a>
+                </div>
+                <div>
+                  {% if form.errors %}
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                    <div class="alert">
+                        <strong>{{ error|escape }}</strong>
+    
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+
+{% endblock %}
+
+
+
+
+
+
+
