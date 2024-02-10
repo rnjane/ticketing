@@ -43,11 +43,12 @@
                       <span class="d-none d-md-inline-block">{{ request.user.email }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-small">
-                      <a class="dropdown-item" href="#">
-                        <i class="material-icons">&#xE7FD;</i> Profile</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item text-danger" href="{% url 'authenticate:logout' %}">
-                        <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                      <form method="post" action="{% url 'authenticate:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="dropdown-item text-danger">
+                          <i class="material-icons text-danger">&#xE879;</i> Logout 
+                        </button>
+                    </form>
                     </div>
                   </li>
                 </ul>
